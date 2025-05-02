@@ -1,1 +1,193 @@
-# sayangkuh
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Selamat Pagi Ayang 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top, #ffe4ec, #e0f7ff);
+      font-family: 'Comic Sans MS', cursive;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .start-button-container {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .start-button {
+      padding: 15px 30px;
+      font-size: 1.5em;
+      background-color: #ff4d88;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .start-button:hover {
+      transform: scale(1.1);
+    }
+
+    .content {
+      display: none;
+    }
+
+    h1 {
+      margin-top: 50px;
+      font-size: 3em;
+      color: #ff4d88;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .typing {
+      font-size: 1.5em;
+      color: #555;
+      width: 80%;
+      margin: 0 auto;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid pink;
+      animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 80% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: pink; }
+    }
+
+    img {
+      width: 200px;
+      margin-top: 30px;
+      animation: bounce 3s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    #time {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #888;
+    }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+      opacity: 0.6;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Tombol Awal -->
+  <div class="start-button-container" id="start-screen">
+    <button class="start-button" onclick="startApp()">Klik Di Sini 💖</button>
+  </div>
+
+  <!-- Konten Utama -->
+  <div class="content" id="main-content">
+    <h1>Selamat Pagi Ayanggggkuuu (&gt;/&lt;) 💗</h1>
+    <div class="typing">Semoga hari kamu secerah senyumanmu pagi ini 😍</div>
+
+    <img src="https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" alt="Cute cat gif">
+    <p id="time"></p>
+
+    <!-- Audio -->
+    <audio id="bg-music" autoplay loop>
+  <source src="https://rakai54.github.io/ayang-web/only_the_except.mp3" type="audio/mp3">
+</audio>
+
+  </div>
+  
+
+
+  <!-- Hati Jatuh -->
+  <script>
+    function updateTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('id-ID');
+      document.getElementById('time').textContent = "Sekarang pukul " + timeString;
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    function startApp() {
+      document.getElementById('start-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+
+      // Mulai jam dan animasi hati
+      setInterval(updateTime, 1000);
+      updateTime();
+      setInterval(createHeart, 300);
+
+      // Putar musik
+      const music = document.getElementById("bg-music");
+      music.play().catch(() => {
+        alert("Klik halaman sekali lagi agar musik bisa diputar 😊");
+      });
+    }
+  </script>
+
+</body>
+</html>
